@@ -9,11 +9,14 @@ import Favorites from "./pages/Favorites/Favorites";
 import Details from "./pages/Details/Details";
 import Navbar from "./components/Header/Navbar/Navbar";
 
-export default function App() {
+function App() {
+
+    const handleLogin = () => {};
+
     return (
-        <div className="container-xxl border border-danger d-flex flex-column mh-100">
+        <div className="container-xxl d-flex flex-column mh-100">
             <BrowserRouter>
-                <Navbar/>
+                <Navbar isLoggedIn={true} handleOnLogin={handleLogin}/>
                 <Routes>
                     <Route path="/" index={true} element={<Home/>}/>
                     <Route path="/favorites" element={
@@ -29,3 +32,5 @@ export default function App() {
         </div>
     );
 }
+
+export default App;
