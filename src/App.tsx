@@ -8,28 +8,33 @@ import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import Favorites from "./pages/Favorites/Favorites";
 import Details from "./pages/Details/Details";
 import Navbar from "./components/Header/Navbar/Navbar";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 
 function App() {
+    const queryClient = new QueryClient();
 
-    const handleLogin = () => {};
+    const handleLogin = () => {
+    };
 
     return (
-        <div className="container-xxl d-flex flex-column mh-100">
-            <BrowserRouter>
-                <Navbar isLoggedIn={true} handleOnLogin={handleLogin}/>
-                <Routes>
-                    <Route path="/" index={true} element={<Home/>}/>
-                    <Route path="/favorites" element={
-                        <ProtectedRoute
-                            element={<Favorites/>}
-                            isLoggedIn={true} //todo: zameni sa pravom vrednoscu
-                        />
-                    }/>
-                    <Route path="/details/:symbol" element={<Details/>}/>
-                    <Route path="*" element={<NotFound/>}/>
-                </Routes>
-            </BrowserRouter>
-        </div>
+        <QueryClientProvider client={queryClient}>
+            <div className="container-xxl d-flex flex-column mh-100">
+                <BrowserRouter>
+                    <Navbar isLoggedIn={true} handleOnLogin={handleLogin}/>
+                    <Routes>
+                        <Route path="/" index={true} element={<Home/>}/>
+                        <Route path="/favorites" element={
+                            <ProtectedRoute
+                                element={<Favorites/>}
+                                isLoggedIn={true} //todo: zameni sa pravom vrednoscu
+                            />
+                        }/>
+                        <Route path="/details/:symbol" element={<Details/>}/>
+                        <Route path="*" element={<NotFound/>}/>
+                    </Routes>
+                </BrowserRouter>
+            </div>
+        </QueryClientProvider>
     );
 }
 
